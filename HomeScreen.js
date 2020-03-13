@@ -1,9 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, TouchableOpacity } from 'react-native';
-// import { Header } from 'react-native-elements';
-// import DetailScreen from './DetailScreen'
-// import Icon from 'react-native-vector-icons/FontAwesome'
-import AntIcon from 'react-native-vector-icons/AntDesign';
 import ReactMoE from 'react-native-moengage'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -25,6 +21,7 @@ export class HomeScreen extends React.Component {
       console.log("InApp clicked: ", payload);
     });
   }
+  //The user attributes and events tracked below are only used for illustration purposes
   state = {
     names: [
       {
@@ -66,14 +63,14 @@ export class HomeScreen extends React.Component {
         id: 5,
         name: 'Set Email',
         action: () => {
-          ReactMoE.setUserEmailID("sdk@moengage.com")
+          ReactMoE.setUserEmailID("abc@moengage.com")
         }
       },
       {
         id: 6,
         name: 'Set Contact Number',
         action: () => {
-          ReactMoE.setUserContactNumber("987129340271")
+          ReactMoE.setUserContactNumber("1234567890")
         }
       },
       {
@@ -132,13 +129,6 @@ export class HomeScreen extends React.Component {
           ReactMoE.setUserAttribute("double", 123.4343)
         }
       },
-      // {
-      //   id: 15,
-      //   name: '',
-      //   action: () =>{
-
-      //   }
-      // },
       {
         id: 16,
         name: 'Custom Location User Attribute',
