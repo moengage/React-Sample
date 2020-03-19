@@ -27,7 +27,7 @@
 	<key>MoEngage</key>
 	<dict>
 		<key>MoEngage_APP_ID</key>
-		<string>Your App Id</string>
+		<string>YOUR APP ID</string>
 	</dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>

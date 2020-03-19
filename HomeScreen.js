@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, TouchableOpacity } from 'react-native';
-import ReactMoE from 'react-native-moengage'
-import { ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, TouchableOpacity, ScrollView } from 'react-native';
+import ReactMoE from 'react-native-moengage';
 
 export class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -178,6 +177,15 @@ export class HomeScreen extends React.Component {
               "gcm_campaign_id": new Date().getTime()
             }
           )
+        }
+      },
+      {
+        id: 22,
+        name: 'Push settings',
+        action: () => {
+          //This is only for iOS
+          const ReactMoE = require('react-native-moengage')
+          ReactMoE.registerForPush();
         }
       }
     ]
