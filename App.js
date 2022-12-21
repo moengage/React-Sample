@@ -5,49 +5,19 @@
  * @format
  * @flow
  */
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, FlatList, TouchableHighlight} from 'react-native';
-import AppNavigator from './AppNavigator'
-import { Header } from 'react-native-elements';
+import React, {Component, useEffect} from 'react';
+import { View, Text } from 'react-native';
+import {HomeScreen} from "./HomeScreen";
+import ReactMoE from 'react-native-moengage';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default App = () => {
+  useEffect(() => {
+    ReactMoE.initialize("Enter Your App Id");
+  }, [])
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style = {{flex: 1}}>
-        <AppNavigator />
-      </View>
-    );
-  }
+  return (
+    <View style={{flex: 1}}>
+      <HomeScreen />
+    </View>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-});

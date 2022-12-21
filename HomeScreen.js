@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, TouchableOpacity, ScrollView } from 'react-native';
-import ReactMoE from 'react-native-moengage';
+import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
+import ReactMoE, {
+  MoEGeoLocation,
+  MoEProperties,
+  MoEAppStatus
+} from 'react-native-moengage';
 
 export class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
   constructor(properties){
     super(properties)
     ReactMoE.setEventListener("pushClicked", (payload) => {
@@ -27,144 +28,153 @@ export class HomeScreen extends React.Component {
         id: 0,
         name: 'Track Event',
         action: () => {
-          ReactMoE.trackEvent("testEvent", { "a": "a" });
+          let properties = new MoEProperties();
+          properties.addAttribute("a", "a");
+          ReactMoE.trackEvent("testEvent", properties);
         }
       },
       {
         id: 1,
         name: 'Set Unique Id',
         action: () => {
-          ReactMoE.setUserUniqueID(4102409962159437)
+          ReactMoE.setUserUniqueID(4102409962159437);
         }
       },
       {
         id: 2,
         name: 'Set User Name',
         action: () => {
-          ReactMoE.setUserName("MoE")
+          ReactMoE.setUserName("MoE");
         }
       },
       {
         id: 3,
         name: 'Set First Name',
         action: () => {
-          ReactMoE.setUserFirstName("MoEngage")
+          ReactMoE.setUserFirstName("MoEngage");
         }
       },
       {
         id: 4,
         name: 'Set Last Name',
         action: () => {
-          ReactMoE.setUserLastName("Inc")
+          ReactMoE.setUserLastName("Inc");
         }
       },
       {
         id: 5,
         name: 'Set Email',
         action: () => {
-          ReactMoE.setUserEmailID("abc@moengage.com")
+          ReactMoE.setUserEmailID("abc@moengage.com");
         }
       },
       {
         id: 6,
         name: 'Set Contact Number',
         action: () => {
-          ReactMoE.setUserContactNumber("1234567890")
+          ReactMoE.setUserContactNumber("1234567890");
         }
       },
       {
         id: 7,
         name: 'Set Birthday',
         action: () => {
-          ReactMoE.setUserBirthday("22/05/2015")
+          ReactMoE.setUserBirthday("22/05/2015");
         }
       },
       {
         id: 8,
         name: 'Set Gender',
         action: () => {
-          ReactMoE.setUserGender("male")
+          ReactMoE.setUserGender("male");
         }
       },
       {
         id: 9,
         name: 'Default User Location Attribute',
         action: () => {
-          ReactMoE.setUserLocation(12.312, 123.453)
+          ReactMoE.setUserLocation(new MoEGeoLocation(12.312, 123.453));
         }
       },
       {
         id: 10,
         name: 'Long User Attribute',
         action: () => {
-          ReactMoE.setUserAttribute("long", 12346972392279832)
+          ReactMoE.setUserAttribute("long", 12346972392279832);
         }
       },
       {
         id: 11,
         name: 'String User Attribute',
         action: () => {
-          ReactMoE.setUserAttribute("string", "teststr")
+          ReactMoE.setUserAttribute("string", "teststr");
         }
       },
       {
         id: 12,
         name: 'Boolean User Attribute',
         action: () => {
-          ReactMoE.setUserAttribute("boolean", true)
+          ReactMoE.setUserAttribute("boolean", true);
         }
       },
       {
         id: 13,
         name: 'Integer User Attribute',
         action: () => {
-          ReactMoE.setUserAttribute("int", 1234)
+          ReactMoE.setUserAttribute("int", 1234);
         }
       },
       {
         id: 14,
         name: 'Double User Attribute',
         action: () => {
-          ReactMoE.setUserAttribute("double", 123.4343)
+          ReactMoE.setUserAttribute("double", 123.4343);
         }
       },
       {
         id: 16,
         name: 'Custom Location User Attribute',
         action: () => {
-          ReactMoE.setUserAttributeLocation("location", 12.3, 12.345)
+          ReactMoE.setUserAttributeLocation("location", new MoEGeoLocation(12.312, 123.453));
         }
       },
       {
         id: 17,
         name: 'Install',
         action: () => {
-          ReactMoE.isExistingUser(true)
+          ReactMoE.setAppStatus(MoEAppStatus.Install);
         }
       },
       {
-        id: 18,
-        name: 'Show InApp',
+        id: 17,
+        name: 'Update',
         action: () => {
-          ReactMoE.showInApp()
+          ReactMoE.setAppStatus(MoEAppStatus.Update);
         }
       },
       {
         id: 19,
-        name: 'Set Alias',
+        name: 'Show InApp',
         action: () => {
-          ReactMoE.setAlias(397642348374238423428374)
+          ReactMoE.showInApp();
         }
       },
       {
         id: 20,
-        name: 'Pass Push Token',
+        name: 'Set Alias',
         action: () => {
-          ReactMoE.passPushToken("dummyToken")
+          ReactMoE.setAlias(397642348374238423428374);
         }
       },
       {
         id: 21,
+        name: 'Pass Push Token',
+        action: () => {
+          ReactMoE.passPushToken("dummyToken");
+        }
+      },
+      {
+        id: 22,
         name: 'Pass Push Payload',
         action: () => {
           ReactMoE.passPushPayload(
@@ -180,18 +190,17 @@ export class HomeScreen extends React.Component {
         }
       },
       {
-        id: 22,
+        id: 23,
         name: 'Push settings',
         action: () => {
           //This is only for iOS
           const ReactMoE = require('react-native-moengage')
-          ReactMoE.registerForPush();
+          Platform.OS === 'ios' ? ReactMoE.registerForPush() : alert("Available In Ios Only");
         }
       }
     ]
   }
   render() {
-    ReactMoE.initialize();
     return (
       <ScrollView>
         {

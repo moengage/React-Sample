@@ -6,12 +6,13 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.moengage.core.Logger;
+import com.moengage.core.LogLevel;
 import com.moengage.core.MoEngage;
+import com.moengage.core.config.GeofenceConfig;
+import com.moengage.core.config.LogConfig;
+import com.moengage.core.config.NotificationConfig;
 import com.moengage.react.MoEInitializer;
 import com.moengage.react.MoEReactPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,10 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
+      return Arrays.asList(
           new MainReactPackage(),
-          new RNGestureHandlerPackage(),
-          new VectorIconsPackage(),
           new MoEReactPackage()
       );
     }
@@ -48,18 +47,21 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    MoEngage moEngage =
-        new MoEngage.Builder(this, "Your App Id")
-            .setNotificationSmallIcon(R.drawable.icon)
-            .setNotificationLargeIcon(R.drawable.ic_launcher)
-            .setLogLevel(Logger.VERBOSE)
-            .optOutNavBar()
-            .enableLocationServices()
-            .enableLogsForSignedBuild()
-            .setNotificationType(R.integer.notification_type_multiple)
-            .optOutDefaultInAppDisplay()
-            .build();
-    MoEInitializer.initialize(moEngage);
+    MoEngage.Builder moEngage =
+        new MoEngage.Builder(this, "Enter Your App Id")
+            .configureNotificationMetaData(new NotificationConfig(
+                R.drawable.icon,
+                R.drawable.ic_launcher,
+                R.color.notification_color,
+                true
+            )).configureLogs(new LogConfig(
+                LogLevel.VERBOSE,
+                true
+            )).configureGeofence(new GeofenceConfig(
+                true
+            ));
+    MoEInitializer.INSTANCE.initializeDefaultInstance(getApplicationContext(), moEngage);
+
     //MoEngage.initialise(moEngage);
   }
 }
